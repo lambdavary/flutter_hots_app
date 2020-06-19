@@ -16,7 +16,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Response response = await get('https://hotsapi.net/api/v1/heroes');
     List<dynamic> list = jsonDecode(response.body);
-    print(list.elementAt(0)['name']);
 
     for(int i = 0; i<list.length; i++){
       HeroItem heroItem = HeroItem(name: list.elementAt(i)['name'].toString()
@@ -24,10 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
           , type: list.elementAt(i)['type'].toString()
           , icon_url: list.elementAt(i)['icon_url'].toString());
       heroes.add(heroItem);
-      print(heroItem.name);
-      print(heroItem.role);
-      print(heroItem.type);
-      print(heroItem.icon_url);
     }
 
     Navigator.pushReplacementNamed(context, '/HeroesList', arguments: {

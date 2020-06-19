@@ -15,7 +15,9 @@ class _HeroesListState extends State<HeroesList> {
     List<HeroItem> listOfHeroes = heroes['listOfHeroes'];
 
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
+        backgroundColor: Colors.blue[800],
         title: Text(
           'Heroes of the Storm Heroes'
         ),
@@ -24,14 +26,26 @@ class _HeroesListState extends State<HeroesList> {
       body: ListView.builder(
         itemBuilder: (context, index){
           return Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage('${listOfHeroes.elementAt(index).icon_url.substring(8, listOfHeroes.elementAt(index).icon_url.length-1)}'),
-              ),
-              onTap: (){},
-              title: Text(
-                listOfHeroes.elementAt(index).name
-              ),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage('${listOfHeroes.elementAt(index).icon_url.substring(8, listOfHeroes.elementAt(index).icon_url.length-1)}'),
+                  ),
+                  onTap: (){
+                    Navigator.pushNamed(context, '/HeroDetail', arguments: {
+                      'heroName': listOfHeroes.elementAt(index).name
+                    });
+                  },
+                  title: Text(
+                      listOfHeroes.elementAt(index).name
+                  ),
+                  trailing: Icon(Icons.navigate_next),
+                  subtitle: Text(
+                      listOfHeroes.elementAt(index).role
+                      ),
+                ),
+              ],
             ),
           );
         },
